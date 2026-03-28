@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[Haocong He]()<sup>1*</sup>, [Chenfei Liao](https://chenfei-liao.github.io/)<sup>2*&dagger;</sup>, [Zichen Wen](https://scholar.google.com/citations?user=N-aPFvEAAAAJ&hl=zh-CN&oi=ao)<sup>1,7</sup>, [Zihao Dongfang]()<sup>2</sup>, [Xu Zheng](https://zhengxujosh.github.io/)<sup>2</sup>, [Bin Ren](https://amazingren.github.io/)<sup>3</sup>, [Chang Su]()<sup>4</sup>, [Zixin Zhang](https://scholar.google.com/citations?user=BbZ0mwoAAAAJ&hl=zh-CN)<sup>2</sup>, [Harold H. Chen](https://haroldchen19.github.io/)<sup>2</sup>, [Hongfei Zhang](https://github.com/soyouthinkyoucantell)<sup>2</sup>, [Weijia Li]()<sup>5</sup>, [Kailun Yang]()<sup>6</sup>, [Conghui He]()<sup>7</sup>, [Xuming Hu](https://xuminghu.github.io/)<sup>2</sup>, [Nicu Sebe](https://disi.unitn.it/~sebe/)<sup>8</sup>, [Linfeng Zhang]()<sup>1&Dagger;</sup>
+[Haocong He](https://openreview.net/profile?id=%7EHaocong_He1)<sup>1*</sup>, [Chenfei Liao](https://chenfei-liao.github.io/)<sup>2*&dagger;</sup>, [Zichen Wen](https://scholar.google.com/citations?user=N-aPFvEAAAAJ&hl=zh-CN&oi=ao)<sup>1,7</sup>, [Zihao Dongfang](https://scholar.google.com/citations?user=IvJ4_xsAAAAJ&hl=zh-CN)<sup>2</sup>, [Xu Zheng](https://zhengxujosh.github.io/)<sup>2</sup>, [Bin Ren](https://amazingren.github.io/)<sup>3</sup>, [Chang Su](https://openreview.net/profile?id=~Chang_Su17)<sup>4</sup>, [Zixin Zhang](https://scholar.google.com/citations?user=BbZ0mwoAAAAJ&hl=zh-CN)<sup>2</sup>, [Harold H. Chen](https://haroldchen19.github.io/)<sup>2</sup>, [Hongfei Zhang](https://github.com/soyouthinkyoucantell)<sup>2</sup>, [Weijia Li](https://liweijia.github.io/)<sup>5</sup>, [Kailun Yang](https://yangkailun.com/)<sup>6</sup>, [Conghui He](https://conghui.ai/)<sup>7</sup>, [Xuming Hu](https://xuminghu.github.io/)<sup>2</sup>, [Nicu Sebe](https://disi.unitn.it/~sebe/)<sup>8</sup>, [Linfeng Zhang](https://www.zhanglinfeng.tech/)<sup>1&Dagger;</sup>
 
 <sup>1</sup>SJTU, <sup>2</sup>HKUST(GZ), <sup>3</sup>MBZUAI, <sup>4</sup>JLU, <sup>5</sup>THU, <sup>6</sup>HNU, <sup>7</sup>Shanghai AI Lab, <sup>8</sup>UniTrento
 
@@ -29,7 +29,6 @@ Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-S
 </div>
 
 ## 🚀 News
-* **[2026-03]** 🔥 [OmniCoT Dataset](#-omnicot-dataset) and OmniCoT-R1 model will be released soon!
 * **[2026-03]** 📄 Paper is under review.
 
 ---
@@ -42,14 +41,9 @@ Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-S
 
 ---
 
-## 🛠️ Environment Setup
-### 1. Install Dependencies
-```bash
-conda create -n omnicot python=3.10
-conda activate omnicot
-pip install -r requirements.txt
-```
-*(Detailed environment setup instructions will be updated upon code release.)*
+
+## 🚀 Quick Start
+*(Inference and evaluation code will be provided soon.)*
 
 ---
 
@@ -70,11 +64,6 @@ The dataset follows the "See-Locate-Move" taxonomy, evaluating multi-hop viewpoi
 
 ---
 
-## 🚀 Quick Demo
-*(Inference and evaluation code will be provided soon.)*
-
----
-
 ## 💬 Citation
 If you find our work helpful, please cite:
 ```bibtex
@@ -85,8 +74,3 @@ If you find our work helpful, please cite:
   year    = {2026}
 }
 ```
-
----
-
-## 📧 Contact
-If you have any questions or suggestions, please feel free to contact us at [cliao127@connect.hkust-gz.edu.cn](mailto:cliao127@connect.hkust-gz.edu.cn).
