@@ -18,7 +18,7 @@
 </div>
 <br>
 
-Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-Step Panoramic Reasoning** (ECCV 2026).
+Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-Step Panoramic Reasoning**.
 
 > Multimodal Large Language Models (MLLMs) have demonstrated promising spatial reasoning capabilities, while these abilities remain underexplored in the emerging visual modality of panoramic imagery. The full 360° × 180° field of view of panoramas essentially supports complex global multi-step reasoning, which is also the fundamental advantage of panoramas in applications such as embodied intelligence. In this paper, we introduce **OmniCoT**, a panoramic spatial reasoning suite designed to enable MLLMs to use global evidence and perform multi-step inference across viewpoints.
 
@@ -30,7 +30,7 @@ Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-S
 
 ## 🚀 News
 * **[2026-03]** 🔥 [OmniCoT Dataset](#-omnicot-dataset) and OmniCoT-R1 model will be released soon!
-* **[2026-03]** 📄 Paper is submitted to ECCV 2026.
+* **[2026-03]** 📄 Paper is under review.
 
 ---
 
@@ -78,12 +78,11 @@ The dataset follows the "See-Locate-Move" taxonomy, evaluating multi-hop viewpoi
 ## 💬 Citation
 If you find our work helpful, please cite:
 ```bibtex
-@inproceedings{omnicot2026,
-  title     = {OmniCoT: A Benchmark for Global and Multi-Step Panoramic Reasoning},
-  author    = {He, Haocong and Liao, Chenfei and Wen, Zichen and Dongfang, Zihao and Zheng, Xu and Ren, Bin and Su, Chang and Zhang, Zixin and Chen, Harold Haodong and Zhang, Hongfei and Li, Weijia and Yang, Kailun and He, Conghui and Hu, Xuming and Sebe, Nicu and Zhang, Linfeng},
-  booktitle = {European Conference on Computer Vision (ECCV)},
-  year      = {2026},
-  note      = {To appear}
+@article{omnicot2026,
+  title   = {OmniCoT: A Benchmark for Global and Multi-Step Panoramic Reasoning},
+  author  = {He, Haocong and Liao, Chenfei and Wen, Zichen and Dongfang, Zihao and Zheng, Xu and Ren, Bin and Su, Chang and Zhang, Zixin and Chen, Harold Haodong and Zhang, Hongfei and Li, Weijia and Yang, Kailun and He, Conghui and Hu, Xuming and Sebe, Nicu and Zhang, Linfeng},
+  journal = {arXiv preprint},
+  year    = {2026}
 }
 ```
 
