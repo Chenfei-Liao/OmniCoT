@@ -357,40 +357,5 @@ python src/stage_cache.py --cache-dir data/cache/stage_cache --list
 python src/stage_cache.py --cache-dir data/cache/stage_cache --scene scene_0001
 ```
 
-## Reproducibility
 
-This release is designed to be reasonably reproducible at the pipeline level, but not bitwise identical across providers or model versions. This matches the paper setting: the data-generation procedure, prompt system, and filtering logic are fixed, while final accepted QA content can still vary with backend model behavior.
 
-What is stable:
-
-- Scene discovery and processing logic in code
-- Prompt files included in this repository
-- Cache semantics and export logic
-- Random object sampling, when `batch.random_seed` is fixed
-
-What may still vary across runs:
-
-- Model outputs from hosted APIs
-- Scoring and quality-evaluation judgments
-- Final accepted QA set when provider/model/version changes
-- Token usage and latency
-
-For reproducible experiments, we recommend:
-
-1. Pin the exact provider endpoint and model names in your private config.
-2. Keep `batch.random_seed` fixed.
-3. Keep prompt files unchanged across runs.
-4. Record the command line, config file, and run date used for generation.
-5. Preserve caches for internal experiment tracking, but do not commit them publicly.
-6. If you aim to mirror the paper setup closely, use the same family of generation and judge models reported in the paper, or clearly document any substitutions.
-
-## Privacy and Release Checklist
-
-- Do not commit real API keys, private endpoints, or private dataset paths.
-- Keep provider settings in a local private config when needed.
-- Do not commit `data/cache/` or generated outputs unless they have been explicitly reviewed for release.
-- Review exported QA fields before publication, especially `description` and `random_objects`, if you export from stage cache.
-
-## Citation
-
-If you use this codebase in research, please cite the corresponding benchmark paper.
