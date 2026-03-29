@@ -1,0 +1,5 @@
+﻿**For Move & Translation Simulation (Type 3):**
+- Describe start location.
+- Simulate movement and optional turn.
+- Determine first encountered object or target visibility.
+- Keep 3-5 concise natural-language steps.

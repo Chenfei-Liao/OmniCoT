@@ -1,0 +1,9 @@
+﻿    **Multi-Hop Object Guidelines:**
+    - 2-hop relation chain
+    - Use "Nearby" direction info (e.g., "north of", "to the east of")
+    - Distance qualifiers: "nearest", "second closest"
+
+    **Example:**
+    "What object is directly west of the NEAREST object that is north of the piano?"
+
+    **Reasoning Steps:** 2-3

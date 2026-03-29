@@ -1,0 +1,10 @@
+﻿**Reasoning Task: Viewpoint Transformation (Type 1)**
+This includes:
+- Type 1.1: Viewpoint transformation identify
+- Type 1.2: Viewpoint transformation angle
+
+**Reasoning Steps Required (2-4 steps):**
+1. Identify starting position and initial facing.
+2. Apply each rotation or directional change in sequence.
+3. Resolve nearest object or compute total angle.
+4. Provide final deterministic answer.

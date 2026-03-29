@@ -1,0 +1,7 @@
+﻿**Critical Reminders:**
+- Generate EXACTLY $count question(s) of type "$question_type"
+- Every question must be answerable with a SINGLE correct answer
+- Use natural language ONLY for object references (no coordinates)
+- Output valid JSON with no trailing commas
+
+Generate now:

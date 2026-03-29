@@ -1,0 +1,5 @@
+﻿**For Viewpoint Transformation (Type 1):**
+- Identify start object and initial facing.
+- Apply turns in order.
+- Resolve nearest object or total angle.
+- Keep 3-5 concise natural-language steps.

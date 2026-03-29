@@ -1,0 +1,4 @@
+﻿Occlusion Reasoning Rules:
+- Ask visibility between two specific objects.
+- Explicitly consider walls as opaque and windows as transparent.
+- Keep answer format as Yes or No.

@@ -1,0 +1,10 @@
+﻿**Reasoning Task: Multi-Hop Relationship Reasoning (Type 2)**
+This includes:
+- Type 2.1: Multi-hop object identification
+- Type 2.2: Multi-hop direction identification
+
+**Reasoning Steps Required (2-3 steps):**
+1. Identify anchor object in natural language.
+2. Apply first spatial relation plus qualifier and find intermediate object.
+3. Apply second relation and determine final object/direction.
+4. State final answer.

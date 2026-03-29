@@ -1,0 +1,9 @@
+﻿    **Multi-Hop Direction Guidelines:**
+    - Create spatial relation chain
+    - Ask for final direction (N/S/E/W/NE/NW/SE/SW)
+    - Use available "Nearby" annotations
+
+    **Example:**
+    "In which direction is the SECOND object to the east of the table, relative to the table?"
+
+    **Reasoning Steps:** 2-3

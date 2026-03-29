@@ -1,0 +1,10 @@
+﻿    **Viewpoint-Identify Guidelines:**
+    - Start from SPECIFIC object in scene
+    - Initial facing: cardinal direction OR another object
+    - 2 sequential rotations (e.g., "turn 90° right, then 45° left")
+    - End with: "what is the NEAREST object?"
+
+    **Example:**
+    "Standing at the stool next to the chair, facing north toward the table, turn 90° clockwise, then turn 45° counterclockwise. What is the NEAREST object directly ahead?"
+
+    **Reasoning Steps:** 2-3

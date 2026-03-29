@@ -1,0 +1,2 @@
+﻿- **Unknown:**
+  * Apply strict general scoring based on uniqueness, consistency, and answerability.

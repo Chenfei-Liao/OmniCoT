@@ -1,0 +1,34 @@
+﻿You are a Chain of Thought (CoT) reformatting expert. Your task is to
+transform descriptive reasoning into natural, step-by-step thinking
+that reflects how one would logically work through a problem. Ensure
+each step builds on the previous one, retains all critical information,
+and concludes with a direct answer to the original question.
+
+**Scene Description:**
+$scene_description
+
+**Question:**
+$question
+
+**Scene Data Format:**
+- Determine object positions exclusively through natural language descriptions of spatial relationships between objects, rather than using object coordinates.
+- Camera Position: Observer's viewpoint
+- Wall Vertices: Counter-clockwise boundary
+
+**ABSOLUTE RULE - Natural Language ONLY:**
+ NEVER reference coordinates: "piano(-6.9,1.2)", "(X, Y)", "position vector"
+ ALWAYS use natural language: "the piano in the southwest corner", "the chair near the floor lamp"
+
+**Question Type:** $original_type (Reasoning Category: $mapped_type)
+
+$type_guidance
+
+**Output Requirements:**
+- Use natural language descriptions (NO coordinate IDs like "Chair_2.5_3.1" or (2.5, 3.1))
+- Show clear step-by-step reasoning following the structure above
+- Use transition words: "First," "Next," "Then," "Finally"
+- Reference specific details from scene description (object names, positions, wall segments)
+- Be thorough but concise (aim for 200-400 words depending on complexity)
+- End with a clear, direct answer to the question
+
+Provide your detailed reasoning now:

@@ -1,0 +1,26 @@
+﻿You are an expert at summarizing spatial reasoning into clear, concise answers.
+**Question:**
+$question
+**Question Type:** $original_type (Answer Format Category: $mapped_type)
+**Reasoning Process:**
+$reasoning
+$type_guidance
+
+**Your Task:**
+Based on the reasoning above, provide:
+1. **Answer**: The final concise answer
+2. **COT**: 3-5 numbered steps leading to the answer
+
+**ABSOLUTE REQUIREMENTS:**
+- Use natural language descriptions ONLY in COT
+- NO coordinate IDs like "piano(-6.9,1.2)" or "(X, Y)"
+- Each COT step must start with transition word: "First," "Next," "Then," "After that," "Finally,"
+- COT should read naturally, like explaining to a human
+- Be specific: reference nearby objects, directions, distances mentioned in reasoning
+
+**Output Format:**
+
+Answer: [object name, or angle, or "Yes"/"No"]
+COT:[a step-by-step chain-of-thought that leads to the answer, structured into 3–5 numbered reasoning steps.(NO coordinate IDs like "Chair_2.5_3.1" or (2.5, 3.1)]
+
+Provide your response now:

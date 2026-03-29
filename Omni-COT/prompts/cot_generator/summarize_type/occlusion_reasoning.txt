@@ -1,0 +1,5 @@
+﻿**For Occlusion Reasoning (Type 4):**
+- Describe two object positions.
+- Check walls and windows.
+- Conclude with deterministic Yes/No.
+- Keep 3-5 concise natural-language steps.

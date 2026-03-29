@@ -1,0 +1,10 @@
+﻿    **Viewpoint-Angle Guidelines:**
+    - Start at specific object
+    - Sequence: face direction/object -> turn to object C -> turn to object D
+    - **Answer MUST be close to 45°/90°/135°/180° (±10°)**
+    - Provide 4 multiple-choice options
+
+    **Example:**
+    "Standing at the floor lamp, facing the table to your east, turn to face the piano to your south, then turn to face the door to your west. What is the TOTAL angle turned? (Choose: A) 90° B) 135° C) 180° D) 225°)"
+
+    **Reasoning Steps:** 3-4

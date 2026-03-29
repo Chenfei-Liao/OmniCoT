@@ -1,0 +1,26 @@
+﻿Generate $count high-quality spatial reasoning question(s) of a SPECIFIC type for this 360° scene.
+
+**Scene Description:**
+$scene_description
+
+**Target Question Type:** $question_type
+**Type Name:** $type_name
+**Question Structure:** $type_structure
+**Key Focus:** $type_key
+
+**Critical Rules:**
+1. **Natural Language ONLY:**
+   -  Use: "the chair near the floor lamp", "the piano in the corner"
+   -  Forbid: "piano(-6.9,1.2)", coordinates
+
+2. **Single Unambiguous Answer:**
+   - Use qualifiers: "NEAREST", "FIRST", "closest"
+   - Specify relative positions clearly
+
+3. **Reasoning Complexity:**
+   - Target: 2-4 reasoning steps
+   - Leverage "Nearby" direction info
+   - Use distance relationships from scene data
+
+3. **Type-Specific Requirements for "$question_type":**
+$type_guidance

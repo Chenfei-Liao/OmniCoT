@@ -1,0 +1,5 @@
+﻿**For Multi-Hop Relationship Reasoning (Type 2):**
+- Identify anchor object.
+- Resolve intermediate hop with qualifiers.
+- Resolve second hop and final object/direction.
+- Keep 3-5 concise natural-language steps.

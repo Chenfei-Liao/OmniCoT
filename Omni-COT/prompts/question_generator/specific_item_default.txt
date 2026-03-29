@@ -1,0 +1,10 @@
+﻿    {
+      "question": "[Your generated question text here - must use natural language only and don't contain coordinates]",
+      "type": "$question_type",
+      "current_position_description": "[Natural language description of starting position at SPECIFIC OBJECT]",
+      "current_facing_description": "[Initial facing direction or 'not applicable']",
+      "action_description": "[Description of spatial action/transformation]",
+      "expected_reasoning_steps": 2 | 3 | 4,
+      "requires_wall_reasoning": false,
+      "involves_window": false
+    }

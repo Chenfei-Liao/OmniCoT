@@ -1,0 +1,11 @@
+﻿**Reasoning Task: Movement & Translation Simulation (Type 3)**
+This includes:
+- Type 3.1: Pure translation
+- Type 3.2: Combined move-turn
+
+**Reasoning Steps Required:**
+1. Identify starting position.
+2. Simulate movement vector and endpoint.
+3. Apply rotation if specified.
+4. Predict final field of view or first encountered object.
+5. State final answer.

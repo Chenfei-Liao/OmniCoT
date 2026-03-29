@@ -1,0 +1,22 @@
+﻿This category includes:
+- Pure translation.
+- Combined move-turn.
+
+Type-Specific Evaluation Focus:
+1. Movement Vector Clarity:
+- Direction and distance/endpoint should be explicit.
+- For combined type, include both move and turn.
+
+2. Dynamic Reasoning Requirement:
+- Question should require movement-aware reasoning.
+
+3. Query Type and Answer Determinability:
+- Visibility query should target a single object.
+- First-seen query should use first/nearest qualifier.
+
+4. Movement Type Identification:
+- Distinguish pure translation from move-turn.
+
+Critical Requirements:
+- Movement vector must be explicit.
+- Deterministic answer required.

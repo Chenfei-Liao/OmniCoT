@@ -1,0 +1,9 @@
+﻿**Reasoning Task: Wall-Occlusion Analysis (Type 4)**
+Determine whether two objects can see each other by checking wall barriers.
+
+**Reasoning Steps Required (2-4 steps):**
+1. Identify object positions using natural language.
+2. Determine their relative spatial arrangement.
+3. Check for potential wall barriers.
+4. Consider window transparency when relevant.
+5. Conclude with "Yes" or "No".

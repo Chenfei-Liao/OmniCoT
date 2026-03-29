@@ -1,0 +1,37 @@
+provider:
+  api_key: "${OPENAI_API_KEY}"
+  base_url: "${OPENAI_BASE_URL}"
+  models:
+    vision: "MODEL_VISION"
+    reasoning: "MODEL_REASONING"
+    text: "MODEL_TEXT"
+
+cache_dir: "data/cache"
+prompts_dir: "prompts"
+
+generation:
+  enable_thinking: true
+  max_retries: 6
+  retry_delay: 10
+  retry_exponential_backoff: true
+  retry_max_delay: 60
+  temperature:
+    perception: 0.3
+    reasoning: 0.7
+    summarization: 0.2
+    scoring: 0.5
+    evaluation: 0.3
+    reformatting: 0.7
+  thinking_budget: 1000
+  max_tokens:
+    vision: 10000
+    reasoning: 4096
+    text: 4096
+    question_generation: 4096
+    cot_reformatting: 4096
+    answer_summarization: 4096
+    question_scoring: 4096
+    quality_evaluation: 4096
+  timeout: 180
+  batch_size: 10
+  stream: true

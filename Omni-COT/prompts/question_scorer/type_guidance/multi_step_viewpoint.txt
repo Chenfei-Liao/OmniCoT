@@ -1,0 +1,23 @@
+﻿This category includes:
+- Multi-hop object identification.
+- Multi-hop direction identification.
+
+Type-Specific Evaluation Focus:
+1. Relationship Chain Complexity:
+- Must contain at least two relation hops.
+- Should not be reducible to single-step lookup.
+
+2. Qualifier Usage and Precision:
+- Use distance qualifiers and direction qualifiers.
+- Avoid vague terms.
+
+3. Answer Type Appropriateness:
+- Object query expects object answer.
+- Direction query expects direction answer.
+
+4. Spatial Logic Correctness:
+- Chain must be coherent and answerable from scene geometry.
+
+Critical Requirements:
+- Must have two-hop structure.
+- Must keep answer deterministic.

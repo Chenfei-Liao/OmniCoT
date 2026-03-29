@@ -1,0 +1,106 @@
+﻿You are evaluating a spatial reasoning question for a 360° panoramic scene. Rate it on a 1-10 integer scale.
+
+**Scene Description (used as reference for validation):**
+$scene_description
+
+**Question to Evaluate:**
+$question_text
+
+**Question Metadata:**
+- Type: $original_type
+- Expected reasoning steps: $expected_reasoning_steps
+
+**Evaluation Checklist (Check each point against the Scene Description):**
+
+1. **Format Compliance - Natural Language ONLY (CRITICAL):**
+    PASS: Uses natural language to describe objects and positions
+      - "the chair near the floor lamp in the northern area"
+      - "the piano in the southwest corner"
+      - "the table close to the north window"
+
+    FAIL (Auto score <= 2): Contains coordinate references in question text
+      - "piano(-6.9,1.2)" or "chair at position (-7.0, 5.0)"
+      - "(X, Y)" notation
+      - "object_2.5_3.1" style IDs
+
+   **Note**: Scene description may contain technical IDs for precision, but question text MUST NOT reference them.
+
+2. **Object Uniqueness - Unambiguous Identification (CRITICAL):**
+    PASS: Every mentioned object can be UNIQUELY determined from scene
+      - Uses spatial qualifiers: "NEAREST", "FIRST", "second closest", "directly ahead"
+      - Provides disambiguating context: "the chair near the table, closer to the window"
+      - References nearby objects: "the stool next to the chair"
+
+    FAIL (Score <= 5): Ambiguous object references
+      - "the chair" (when multiple chairs exist without clarification)
+      - "what object will you see?" (without NEAREST/FIRST qualifier)
+      - "turn around" (no specific angle given)
+
+3. **Logical Consistency - Internal Coherence:**
+    PASS: Objects mentioned in question exist in the scene description
+      - Initial and final objects are both present
+      - Spatial relationships are factually correct
+      - Movement paths are physically possible
+
+    FAIL (Score <= 3): Logical errors
+      - References non-existent objects
+      - Contradictory spatial relations (e.g., "north of X but also south of X")
+
+4. **Reasoning Complexity - Appropriate Depth:**
+    PASS: Requires 2-4 reasoning steps based on expected_reasoning_steps
+      - Not trivial (single-step lookup)
+      - Not overly complex (excessive multi-hop chains)
+      - Tests genuine spatial understanding
+
+    FAIL (Score <= 5): Inappropriate complexity
+      - Too simple: "Where is the chair?" (direct lookup)
+      - Too complex: 5+ hop chains or excessive transformations
+
+6. **Answerability - Question Can Be Solved:**
+    PASS: Has EXACTLY ONE correct answer derivable from scene data
+      - All information needed is present in scene description
+      - Answer is determinate (not opinion-based)
+      - Question structure allows for clear conclusion
+
+    FAIL (Score <= 3): Cannot be answered definitively
+      - Missing critical information
+      - Multiple valid interpretations possible
+      - Requires external knowledge not in scene
+
+**Special Type-Specific Auto-Penalties:**
+$type_guidance
+
+**Scoring Scale:**
+- **9-10 (Exceptional):**
+  * Passes ALL checklist items
+  * Creative use of scene features
+  * Appropriate complexity for the type
+
+- **7-8 (Good):**
+  * Passes all critical checks
+  * Minor issues in complexity or phrasing
+  * Solid spatial reasoning required
+
+- **5-6 (Acceptable):**
+  * Passes critical checks but has issues
+
+- **3-4 (Poor):**
+  * Fails 1-2 critical checks
+
+- **1-2 (Unacceptable):**
+  * Fails multiple critical checks
+
+**Grading Instructions:**
+1. Go through each checklist item systematically
+2. Cross-reference object mentions with Scene Description
+3. Verify spatial relationships match scene data
+4. Apply auto-penalties strictly if triggered
+5. Be critical: reserve 9-10 for truly exceptional questions
+6. Most questions should fall in 4-8 range
+
+**Output Format (JSON only):**
+{
+  "score": <1-10 integer, or 0 for fatal flaws>
+}
+
+Output ONLY the JSON.

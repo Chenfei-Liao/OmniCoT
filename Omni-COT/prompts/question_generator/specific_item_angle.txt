@@ -1,0 +1,12 @@
+﻿    {
+      "question": "[Your generated question text here - must use natural language only and don't contain coordinates]",
+      "type": "$question_type",
+      "current_position_description": "[Natural language description of starting object position]",
+      "initial_facing_target": "[Initial facing direction or target object]",
+      "action_description": "[Description of rotation actions: turn to face X, then turn to face Y]",
+      "answer_constraint": "[Must be close to 45°/90°/135°/180° (±10°)]",
+      "multiple_choice_options": ["A) 45°", "B) 90°", "C) 135°", "D) 180°"],
+      "expected_reasoning_steps": 3 | 4,
+      "requires_wall_reasoning": false,
+      "involves_window": false
+    }

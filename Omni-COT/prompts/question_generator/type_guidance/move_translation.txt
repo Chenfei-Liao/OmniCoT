@@ -1,0 +1,10 @@
+﻿    **Move-Translation Guidelines:**
+    - Straight movement (NO rotation)
+    - Direction: N/S/E/W/NE/NW/SE/SW
+    - Distance: 1-3 meters
+    - Ask: "FIRST object encountered"
+
+    **Example:**
+    "From the chair near the floor lamp, walk straight east for 2m. What is the FIRST object you will encounter?"
+
+    **Reasoning Steps:** 2-3

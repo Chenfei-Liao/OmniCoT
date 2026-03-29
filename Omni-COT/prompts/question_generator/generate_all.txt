@@ -1,0 +1,162 @@
+﻿Generate 6 spatial reasoning questions (one per type) for this 360° scene.
+
+**Scene Description:**
+$scene_description
+
+**Core Rules:**
+
+1. **Natural Language Only:**
+    -  While generating questions, Use ONLY natural language to describe spatial relations between objects for determining their positions, instead of using coordinate-based positioning.
+    -  CORRECT: "the chair near the floor lamp", "the table closest to the north wall"
+    -  CORRECT: "the piano in the southwest corner", "the stool next to the chair"
+    -  WRONG: "piano(-6.9,1.2)" or any coordinate-based reference
+    -  WRONG: "chair_1" or object IDs
+
+
+2. **Answer Uniqueness (CRITICAL):**
+   Every question must have EXACTLY ONE unambiguous answer.
+   - Use spatial qualifiers: "NEAREST", "FIRST", "closest", "directly"
+   - Specify relative positions: "to the left of", "north of", "between X and Y"
+   - For visibility questions: Ask about ONE specific target object
+
+3. **Wall & Window Information:**
+   - Wall segments BLOCK line-of-sight (solid barriers)
+   - Windows are TRANSPARENT (can see through walls with windows)
+
+4. **Reasoning Complexity:**
+    - Target: 3-4 reasoning steps
+    - Each step should be clear and verifiable from scene data
+    - Avoid overly convoluted multi-hop chains
+
+**Question Types (Generate All 6):**
+
+ TYPE 1: Viewpoint Transform - Identify Object
+**Structure:** "Standing at [object], facing [direction/object], turn [angle1]° [dir1], then turn [angle2]° [dir2], what is the NEAREST object?"
+
+**Requirements:**
+- Start from a SPECIFIC object mentioned in the scene
+- Initial facing: cardinal direction (N/S/E/W) OR another object
+- Include 2 sequential rotations (e.g., "turn 90° right, then turn 45° left")
+- End with distance qualifier: "NEAREST", "FIRST visible", "directly ahead"
+
+**Example:**
+"Standing at the floor lamp near the chair, facing north, turn 90° clockwise to face east, then turn 45° counterclockwise to face northeast. What is the NEAREST object directly in front of you?"
+
+**Reasoning Steps:** 2-3 steps
+1. Locate starting object position
+2. Apply rotations to determine final facing direction
+3. Identify nearest object in that direction
+
+ TYPE 2: Viewpoint Transform - Angle Calculation
+**Structure:** "Standing at [object A], facing [direction/object B], turn to face [object C], then turn to face [object D]. What is the TOTAL angle turned? (Choose: 45°/90°/135°/180°)"
+
+**Requirements:**
+- Start at specific object
+- Sequence: initial facing -> turn to object C -> turn to object D
+- **Answer MUST be approximately 45°, 90°, 135°, or 180° (±10° tolerance)**
+
+**Example:**
+"Standing at the table near the window, initially facing east toward the door, turn to face the piano to your south, then turn to face the chair to your west. What is the TOTAL cumulative angle turned? (Choose closest: A) 90° B) 135° C) 180° D) 225°)"
+
+**Reasoning Steps:** 3-4 steps
+1. Calculate angle from initial direction to object C
+2. Calculate angle from object C to object D
+3. Sum the two angles
+4. Match to closest option
+
+ TYPE 3: Multi-Hop Object Identification
+**Structure:** "What is [relation2 + qualifier] of the [relation1 + qualifier] object of [anchor]?"
+
+**Requirements:**
+- Create 2-hop spatial relation chain
+- Use distance qualifiers: "nearest", "second closest", "farthest"
+- Use direction qualifiers from scene data: "north of", "to the east of", "behind"
+- Ensure intermediate object is unique
+
+**Example:**
+"What object is directly to the west of the NEAREST object that is north of the piano?"
+
+**Reasoning Steps:** 2-3 steps
+1. Identify anchor object (piano)
+2. Find nearest object north of piano (using Nearby + direction info)
+3. Identify object west of that intermediate object
+
+ TYPE 4: Multi-Hop Direction Identification
+**Structure:** "In which direction is the [relation + qualifier] object of [anchor], relative to [anchor]?"
+
+**Requirements:**
+- Create spatial relation chain
+- Query final direction (answer: N/S/E/W/NE/NW/SE/SW)
+- Use available "Nearby" direction annotations
+
+**Example:**
+"In which direction is the SECOND NEAREST object to the east of the table, relative to the table itself?"
+
+**Reasoning Steps:** 2-3 steps
+1. Identify anchor object (table)
+2. Find second nearest object east of table
+3. Calculate direction from table to that object
+
+ TYPE 5: Move - Pure Translation
+**Structure:** "From [start_object], walk straight [direction] for [distance]m. What is the FIRST object you will encounter?"
+
+**Requirements:**
+- Straight-line movement (NO rotation)
+- Specify cardinal direction (N/S/E/W/NE/NW/SE/SW)
+- Distance: 1-3 meters (reasonable walking distance)
+- Ask about FIRST object encountered
+
+**Example:**
+"From the stool near the chair, walk straight east for 2 meters. What is the FIRST object you will encounter?"
+
+**Reasoning Steps:** 2-3 steps
+1. Identify starting position
+2. Calculate endpoint after 2m east movement
+3. Find first object along that path
+
+ TYPE 6: Move-Turn Combined
+**Structure:** "From [start], walk [direction] for [distance]m, then turn [angle]° [dir]. Is [specific_object] still visible?"
+
+**Requirements:**
+- Compound transformation: movement + rotation
+- Specify movement direction and distance
+- Specify turn angle and direction
+- Ask about ONE specific target object's visibility
+
+**Example:**
+"From the floor lamp, walk north 2 meters toward the table area, then turn 90° clockwise to face east. Is the piano still visible from your new position and facing direction?"
+
+**Reasoning Steps:** 3-4 steps
+1. Calculate new position after movement
+2. Apply rotation to determine final facing
+3. Check if target object is in new field of view
+4. Account for potential obstacles
+
+**Output Format (valid JSON, no markdown):**
+{
+  "questions": [
+    {"question": "...", "type": "viewpoint_transform_identify", "current_position_description": "...", "current_facing_description": "...", "action_description": "...", "expected_reasoning_steps": 2|3|4},
+    {"question": "...", "type": "viewpoint_transform_angle", "current_position_description": "...", "initial_facing_target": "...", "action_description": "...", "answer_constraint": "≈45/90/135/180°", "multiple_choice_options": ["A)45°","B)90°","C)135°","D)180°"], "expected_reasoning_steps": 2|3|4},
+    {"question": "...", "type": "multi_hop_object", "current_position_description": "...", "current_facing_description": "...", "action_description": "...", "expected_reasoning_steps": 2|3|4},
+    {"question": "...", "type": "multi_hop_direction", "current_position_description": "...", "current_facing_description": "...", "action_description": "...", "expected_reasoning_steps": 2|3|4},
+    {"question": "...", "type": "move_translation", "current_position_description": "...", "current_facing_description": "...", "action_description": "...", "expected_reasoning_steps": 2|3|4},
+    {"question": "...", "type": "move_turn_combined", "current_position_description": "...", "current_facing_description": "...", "action_description": "...", "expected_reasoning_steps": 2|3|4}
+    ]
+}
+
+
+**JSON Requirements:**
+- Valid JSON (no trailing commas, proper quotes)
+- Question text on single line
+- Use double quotes only
+- Close all brackets/braces
+
+**Critical Reminders:**
+- Generate EXACTLY 6 questions (one per type)
+- Use ONLY natural language for object references (NO coordinates like "piano(-6.9,1.2)")
+- Leverage "Nearby" direction information
+- Keep reasoning steps between 2-4 (not overly complex)
+- Ensure each question has ONE unambiguous answer
+- Output valid JSON as JSON Requirements section
+
+Generate all 6 types now.

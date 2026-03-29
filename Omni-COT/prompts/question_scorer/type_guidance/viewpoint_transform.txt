@@ -1,0 +1,30 @@
+﻿This category includes:
+- Type 1.1 (viewpoint_transform_identify): Start from SPECIFIC OBJECT, multiple rotations, identify nearest object
+- Type 1.2 (viewpoint_transform_angle): Start from SPECIFIC OBJECT, turn to face targets, calculate total angle (must be close to 45/90/135/180 degrees)
+
+Type-Specific Evaluation Focus:
+1. Starting Position Requirement:
+- MUST start from a specific object.
+- Object description should be unambiguous.
+
+2. Sub-Type Specific Requirements:
+For Type 1.1:
+- Contains at least two sequential rotations.
+- Uses nearest/first/closest qualifier.
+For Type 1.2:
+- Total angle near 45/90/135/180 (±10).
+- Multiple choice options provided.
+- Asks for total angle turned.
+
+3. Answer Determinability:
+- Deterministic single answer required.
+
+4. Facing Direction and Action Clarity:
+- Initial facing and turn directions must be explicit.
+
+Automatic Penalties:
+- Score <= 3: Type 1.1 with only 1 rotation step.
+- Score <= 3: Type 1.2 with angle not near standard values.
+- Score <= 5: Type 1.2 missing multiple choice format.
+- Score <= 6: Type 1.1 missing distance qualifier when multiple objects present.
+- Score <= 6: Starting object ambiguous.

@@ -1,0 +1,18 @@
+﻿This category tests visibility with wall barriers and window transparency.
+
+Type-Specific Evaluation Focus:
+1. Wall Occlusion Logic:
+- Should require line-of-sight blocking reasoning via walls.
+
+2. Window Transparency Handling:
+- Consider windows as transparent where relevant.
+
+3. Question Format and Object Clarity:
+- Prefer Yes/No format with two specific objects.
+
+4. Answer Determinability:
+- Answer should be deterministic from scene geometry.
+
+Critical Requirements:
+- Two specific objects.
+- Visibility-focused deterministic query.

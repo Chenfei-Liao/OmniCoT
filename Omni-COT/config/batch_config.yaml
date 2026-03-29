@@ -1,0 +1,4 @@
+batch:
+  random_seed: 42
+  cache:
+    stage_cache_dir: "data/cache/stage_cache"

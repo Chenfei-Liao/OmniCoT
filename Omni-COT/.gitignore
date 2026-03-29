@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE/editor
+.zed/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Runtime outputs
+data/cache/
+data/outputs/
+
+# Logs
+*.log
+
+# Local secrets
+.env
+.env.*
+config/api_config.local.yaml
+config/private/

@@ -1,0 +1,9 @@
+﻿    **Move-Turn Combined Guidelines:**
+    - Movement + rotation
+    - Specify: direction, distance, turn angle, turn direction
+    - Ask about ONE specific object's visibility
+
+    **Example:**
+    "From the stool, walk north 2m, then turn 90° right to face east. Is the piano still visible?"
+
+    **Reasoning Steps:** 3-4

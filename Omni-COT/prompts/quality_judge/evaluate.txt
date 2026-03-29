@@ -1,0 +1,138 @@
+﻿Rate the quality of spatial reasoning and answer on a 1-10 scale for each.
+
+**Scene Description (for reference validation):**
+$scene_description
+
+**Question:**
+$question
+
+**Reasoning Process:**
+$cot_reasoning
+
+**Final Answer:**
+$final_answer
+
+**Chain of Thought:**
+$cot_lines
+
+**Question Type:** $original_type (Category: $mapped_type)
+
+**CRITICAL RULE - Natural Language ONLY:**
+Both reasoning and answer MUST use natural language descriptions.
+ AUTO-FAIL (Score <= 3) if contains:
+- Coordinate IDs: "piano(-6.9,1.2)", "chair at (-7.0, 5.0)"
+- Position vectors: "(X, Y)", "position (2.5, 3.1)"
+- Object IDs: "table_-8.2_5.7"
+ REQUIRED format:
+- "the piano in the southwest corner"
+- "the chair near the floor lamp in the northern area"
+- "the table close to the north window"
+
+**Reasoning Score Evaluation (1-10):**
+
+**Check 1: Format Compliance (CRITICAL - Auto-fail if violated)**
+CORRECT: Uses natural language ONLY to describe objects and positions
+CORRECT: NO coordinate references anywhere in reasoning
+WRONG: Contains "object(-X,Y)" -> Score <= 2
+
+**Check 2: Reasoning Structure (Expected: 2-4 steps)**
+CORRECT: Structured into clear logical steps (typically 2-4 steps based on question type)
+CORRECT: Each step follows from the previous one
+CORRECT: Uses transition words: "First," "Next," "Then," "Finally,"
+WRONG: Too few steps (trivial, single-step lookup) -> Score <= 4
+WRONG: Too many steps (overly complex, >5 steps) -> Score <= 6
+
+**Check 3: Use of Scene Information**
+CORRECT: References specific objects from scene description
+CORRECT: Spatial relationships match scene data (verify directions/distances against scene)
+WRONG: Contradicts scene information -> Score <= 4
+WRONG: Ignores available spatial clues -> Score <= 6
+
+**Check 4: Type-Specific Requirements**
+
+**Type 1 (Viewpoint Transform):**
+- CORRECT: Identifies starting SPECIFIC OBJECT clearly
+- CORRECT: Tracks initial facing direction
+- CORRECT: Type 1.1: Applies each rotation sequentially (>= 2 rotations required)
+- CORRECT: Type 1.2: Calculates angles and sums total (should be close to 45°/90°/135°/180°)
+- WRONG: Starts from abstract position -> Score <= 3
+- WRONG: Type 1.1 with only 1 rotation -> Score <= 4
+
+**Type 2 (Multi-Hop):**
+- CORRECT: Shows intermediate object at each hop explicitly
+- CORRECT: Applies distance/direction qualifiers correctly (nearest/second/north of)
+- CORRECT: Type 2.1: Reasoning chain leads to target object
+- CORRECT: Type 2.2: Calculates final direction from anchor to target
+- WRONG: Only 1 hop (no intermediate) -> Score <= 4
+- WRONG: Missing qualifiers -> Score <= 5
+
+**Type 3 (Movement):**
+- CORRECT: Describes movement vector (direction + distance)
+- CORRECT: Type 3.1: Identifies objects along straight path
+- CORRECT: Type 3.2: Applies movement THEN rotation in sequence
+- CORRECT: Type 3.2: Checks target visibility from new position/facing
+- WRONG: Movement vector unclear -> Score <= 5
+
+**Type 4 (Occlusion):**
+- CORRECT: Identifies both object positions
+- CORRECT: Checks for wall segments between them
+- CORRECT: Considers window transparency (windows = can see through)
+- CORRECT: Draws correct visibility conclusion
+
+**Check 5: Logical Coherence**
+CORRECT: Each step logically follows from previous
+CORRECT: No contradictory statements
+CORRECT: Reasoning leads to the stated final answer
+WRONG: Contradictory logic -> Score <= 3
+WRONG: Reasoning doesn't support answer -> Score <= 4
+
+**Reasoning Score Scale:**
+- **9-10 (Excellent):** Passes all checks, perfect format, leverages scene features effectively, appropriate complexity
+- **7-8 (Good):** Solid reasoning, passes critical checks, minor imperfections in detail or structure
+- **5-6 (Acceptable):** Meets basic requirements, some issues in clarity or completeness
+- **3-4 (Poor):** Fails multiple checks, significant logic gaps, or format violations
+- **1-2 (Unacceptable):** Contains coordinates, contradictory logic, or fundamentally flawed
+
+---
+
+**Answer Score Evaluation (1-10):**
+
+**Check 1: Format Compliance (CRITICAL)**
+CORRECT: Uses natural language description ONLY
+WRONG: Contains coordinate IDs -> Score <= 2
+
+**Check 2: Correctness**
+CORRECT: Factually correct based on scene data
+CORRECT: Consistent with reasoning process
+CORRECT: Matches expected answer type:
+- Type 1.1 / 2.1 / 3.1: Specific object name
+- Type 1.2: Angle value (e.g., 45°, 90°)
+- Type 2.2: Compass direction (N/S/E/W/NE/NW/SE/SW)
+- Type 3.2 / 4: Yes/No
+WRONG: Factually wrong -> Score <= 4
+Wrong answer type -> Score <= 6
+
+**Answer Score Scale:**
+- **9-10 (Excellent):** Correct, precise, perfectly aligned with reasoning, ideal format
+- **7-8 (Good):** Correct answer, minor format or precision issues
+- **5-6 (Acceptable):** Partially correct or lacks precision
+- **3-4 (Poor):** Wrong answer or contradicts reasoning
+- **1-2 (Unacceptable):** Completely wrong, contains coordinates, or nonsensical
+
+---
+
+**Output Format (JSON only, no explanation):**
+{
+"reasoning_score": <1-10 integer>,
+"answer_score": <1-10 integer>
+}
+
+**Grading Instructions:**
+1. Check CRITICAL format compliance first (coordinates -> auto-fail)
+2. Verify reasoning structure (2-4 steps expected)
+3. Cross-reference spatial claims with scene description
+4. Apply type-specific requirements strictly
+5. Be critical: reserve 9-10 for exceptional quality
+6. Most should fall in 4-8 range
+
+Output ONLY the JSON.
