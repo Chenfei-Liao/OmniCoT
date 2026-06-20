@@ -337,8 +337,6 @@ That export includes fields such as:
 - `Steps`
 - `random_objects`
 
-If you plan to publish exported QA files, review these fields carefully before release.
-
 ## Cache and Resume
 
 Default cache locations:
