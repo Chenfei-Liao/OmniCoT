@@ -29,6 +29,7 @@ Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-S
 </div>
 
 ## 🚀 News
+* **[2026-06]** 📄 Code is made publically available.
 * **[2026-06]** 📄 OmniCoT is accepted by ECCV 2026!
 * **[2026-03]** 📄 Paper is under review.
 
