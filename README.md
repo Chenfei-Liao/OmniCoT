@@ -151,7 +151,8 @@ python -m lmms_eval `
   --model_args pretrained=Qwen/Qwen2.5-VL-7B-Instruct `
   --tasks omnicot_no_desc `
   --batch_size 1 `
-  --limit 8
+  --limit 8 `
+  --output_path results/omnicot_smoke
 ```
 
 Linux/macOS:
@@ -162,7 +163,8 @@ python -m lmms_eval \
   --model_args pretrained=Qwen/Qwen2.5-VL-7B-Instruct \
   --tasks omnicot_no_desc \
   --batch_size 1 \
-  --limit 8
+  --limit 8 \
+  --output_path results/omnicot_smoke
 ```
 
 Available local tasks:
@@ -176,6 +178,53 @@ For full benchmark evaluation, place the complete OmniCoT JSON and image folder
 in a reproducible data location, update
 `lmms_eval/tasks/omnicot/_default_template.yaml`, and set `OMNICOT_DATA_DIR` /
 `OMNICOT_IMAGE_DIR` if your image paths are stored outside the JSON directory.
+
+The answer-evaluation run writes a model submission file to:
+
+```text
+lmms-eval/results/omnicot_smoke/submissions/omnicot_submission.json
+```
+
+### 7. Evaluate CoT quality
+
+After answer evaluation, run the CoT-quality judge on the generated submission:
+
+Windows PowerShell:
+
+```powershell
+$env:OPENAI_API_KEY="your_judge_api_key"
+$env:OPENAI_BASE_URL="https://api.openai.com/v1"
+$env:JUDGE_MODEL="your_judge_model"
+
+python tools/omnicot_cot_quality_eval.py `
+  --input-file results/omnicot_smoke/submissions/omnicot_submission.json `
+  --output-dir results/omnicot_smoke/cot_quality `
+  --mode all `
+  --num-threads 4
+```
+
+Linux/macOS:
+
+```bash
+export OPENAI_API_KEY="your_judge_api_key"
+export OPENAI_BASE_URL="https://api.openai.com/v1"
+export JUDGE_MODEL="your_judge_model"
+
+python tools/omnicot_cot_quality_eval.py \
+  --input-file results/omnicot_smoke/submissions/omnicot_submission.json \
+  --output-dir results/omnicot_smoke/cot_quality \
+  --mode all \
+  --num-threads 4
+```
+
+The script supports three modes:
+
+- `simple`: CoT precision, recall, and F1 against the reference CoT.
+- `spatial`: viewpoint consistency, spatial evidence sufficiency, and reasoning feasibility.
+- `all`: runs both groups of metrics.
+
+`simple` uses two judge calls per sample, `spatial` uses three, and `all` uses
+five. Use `--max-samples` for a small-cost smoke test before full evaluation.
 
 ---
 
