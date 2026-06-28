@@ -42,8 +42,140 @@ Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-S
 ---
 
 
-## 🚀 Quick Start
-*(Inference and evaluation code will be provided soon.)*
+## Quick Start
+
+This repository contains:
+
+- `Omni-COT/`: the OmniCoT QA and CoT generation pipeline.
+- `lmms-eval/`: a vendored `lmms-eval` copy with local OmniCoT task configs under `lmms_eval/tasks/omnicot/`.
+
+### 1. Clone
+
+```bash
+git clone https://github.com/Chenfei-Liao/OmniCoT.git
+cd OmniCoT
+```
+
+### 2. Install Omni-COT
+
+```bash
+cd Omni-COT
+python -m venv .venv
+
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# Linux/macOS
+# source .venv/bin/activate
+
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 3. Configure an OpenAI-compatible API
+
+The default config reads credentials and model names from environment variables.
+
+Windows PowerShell:
+
+```powershell
+$env:OPENAI_API_KEY="your_api_key"
+$env:OPENAI_BASE_URL="https://api.openai.com/v1"
+$env:OMNICOT_REASONING_MODEL="your_reasoning_model"
+$env:OMNICOT_TEXT_MODEL="your_text_model"
+$env:OMNICOT_VISION_MODEL="your_vision_model"
+```
+
+Linux/macOS:
+
+```bash
+export OPENAI_API_KEY="your_api_key"
+export OPENAI_BASE_URL="https://api.openai.com/v1"
+export OMNICOT_REASONING_MODEL="your_reasoning_model"
+export OMNICOT_TEXT_MODEL="your_text_model"
+export OMNICOT_VISION_MODEL="your_vision_model"
+```
+
+If you use one model for every stage, set all three `OMNICOT_*_MODEL` variables to the same model name.
+
+### 4. Run Omni-COT generation
+
+Prepare a dataset root where each scene is stored in its own folder and includes `scene_data.json`, then run:
+
+```bash
+python run.py \
+  --data-root path/to/osr_scenes \
+  --output data/outputs/simplified_batch_output.json \
+  --config config/api_config.yaml \
+  --batch-config config/batch_config.yaml \
+  --question-batches 2 \
+  --target-qa-per-type 1 \
+  --max-workers 5
+```
+
+Runtime caches are stored under `data/cache/`, so rerunning the same command can resume from previous stages.
+
+### 5. Export accepted QA pairs
+
+```bash
+python src/stage_cache.py \
+  --cache-dir data/cache/stage_cache \
+  --export data/outputs/exported_qa.json
+```
+
+### 6. Evaluate OmniCoT with lmms-eval
+
+The repository includes a bundled smoke-test subset with six real OmniCoT cases
+and the corresponding ERP panoramic image:
+
+```text
+lmms-eval/lmms_eval/tasks/omnicot/sample_data/OmniCoT_sample.json
+lmms-eval/lmms_eval/tasks/omnicot/sample_data/image/
+```
+
+Install the local `lmms-eval` copy:
+
+```bash
+cd ../lmms-eval
+python -m pip install --upgrade pip
+pip install -e .
+```
+
+Run the bundled OmniCoT smoke test:
+
+Windows PowerShell:
+
+```powershell
+python -m lmms_eval `
+  --model qwen2_5_vl `
+  --model_args pretrained=Qwen/Qwen2.5-VL-7B-Instruct `
+  --tasks omnicot_no_desc `
+  --batch_size 1 `
+  --limit 8
+```
+
+Linux/macOS:
+
+```bash
+python -m lmms_eval \
+  --model qwen2_5_vl \
+  --model_args pretrained=Qwen/Qwen2.5-VL-7B-Instruct \
+  --tasks omnicot_no_desc \
+  --batch_size 1 \
+  --limit 8
+```
+
+Available local tasks:
+
+- `omnicot_no_desc`: visual input plus question.
+- `omnicot_with_desc`: visual input plus structured scene description plus question.
+- `omnicot_text_only`: text-only ablation.
+- `omnicot_no_thinking`: direct-answer ablation.
+
+For full benchmark evaluation, place the complete OmniCoT JSON and image folder
+in a reproducible data location, update
+`lmms_eval/tasks/omnicot/_default_template.yaml`, and set `OMNICOT_DATA_DIR` /
+`OMNICOT_IMAGE_DIR` if your image paths are stored outside the JSON directory.
 
 ---
 

@@ -51,14 +51,37 @@ python -m venv .venv
 # Linux/macOS
 # source .venv/bin/activate
 
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 ## Quick Start
 
-1. Configure your API endpoint and model names in `config/api_config.yaml`.
-2. Prepare a dataset root where each scene is stored in its own folder and includes `scene_data.json`.
-3. Run the pipeline:
+1. Configure your API endpoint and model names. The default `config/api_config.yaml` reads from environment variables:
+
+   Windows PowerShell:
+
+   ```powershell
+   $env:OPENAI_API_KEY="your_api_key"
+   $env:OPENAI_BASE_URL="https://api.openai.com/v1"
+   $env:OMNICOT_REASONING_MODEL="your_reasoning_model"
+   $env:OMNICOT_TEXT_MODEL="your_text_model"
+   $env:OMNICOT_VISION_MODEL="your_vision_model"
+   ```
+
+   Linux/macOS:
+
+   ```bash
+   export OPENAI_API_KEY="your_api_key"
+   export OPENAI_BASE_URL="https://api.openai.com/v1"
+   export OMNICOT_REASONING_MODEL="your_reasoning_model"
+   export OMNICOT_TEXT_MODEL="your_text_model"
+   export OMNICOT_VISION_MODEL="your_vision_model"
+   ```
+
+   If your provider uses one model for all stages, set the three `OMNICOT_*_MODEL` variables to the same model name.
+
+2. Prepare a dataset root where each scene is stored in its own folder and includes `scene_data.json`, then run:
 
 ```bash
 python run.py \
@@ -354,6 +377,4 @@ python src/stage_cache.py --cache-dir data/cache/stage_cache --stats
 python src/stage_cache.py --cache-dir data/cache/stage_cache --list
 python src/stage_cache.py --cache-dir data/cache/stage_cache --scene scene_0001
 ```
-
-
 
