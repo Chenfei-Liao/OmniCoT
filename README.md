@@ -15,6 +15,7 @@
     <a href="#"><img src="https://img.shields.io/badge/Paper_(arXiv)-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white" alt="Paper"></a>
     <br>
     <a href="https://huggingface.co/datasets/Eustia1/OmniCoT"><img src="https://img.shields.io/badge/Dataset-HuggingFace-orange?style=for-the-badge&logo=huggingface&logoColor=white" alt="Dataset"></a>
+    <a href="https://huggingface.co/Eustia1/OmniCoT-R1"><img src="https://img.shields.io/badge/Model-OmniCoT--R1-orange?style=for-the-badge&logo=huggingface&logoColor=white" alt="Model"></a>
 </div>
 <br>
 
@@ -39,6 +40,7 @@ Official repository for the paper: **OmniCoT: A Benchmark for Global and Multi-S
 - **OmniCoT-B Benchmark (6.7K):** A new benchmark requiring MLLMs to fully use the 360° space and perform multi-hop reasoning, moving beyond simplistic queries that rely on local cues. It measures both answer accuracy and Chain-of-Thought (CoT) quality.
 - **OmniCoT-T Training Set (14.3K):** A purpose-built training set with structured stepwise Chain-of-Thought annotations that explicitly link intermediate reasoning steps to panoramic evidence.
 - **OmniCoT-Real (1K):** A manually annotated real-world subset to quantify the Sim-to-Real gap.
+- **OmniCoT-R1 Model:** Model weights are available on Hugging Face at [Eustia1/OmniCoT-R1](https://huggingface.co/Eustia1/OmniCoT-R1).
 - **OmniCoT-R1 Baseline:** A baseline model developed via a two-stage strategy: SFT to anchor reasoning to panoramic evidence, and GRPO to penalize geometrically incoherent paths, consolidating global 360° spatial consistency.
 
 ---
@@ -63,32 +65,14 @@ cd OmniCoT
 ```bash
 cd Omni-COT
 python -m venv .venv
-
-# Windows PowerShell
-.\.venv\Scripts\Activate.ps1
-
-# Linux/macOS
-# source .venv/bin/activate
-
+source .venv/bin/activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 ### 3. Configure an OpenAI-compatible API
 
-The default config reads credentials and model names from environment variables.
-
-Windows PowerShell:
-
-```powershell
-$env:OPENAI_API_KEY="your_api_key"
-$env:OPENAI_BASE_URL="https://api.openai.com/v1"
-$env:OMNICOT_REASONING_MODEL="your_reasoning_model"
-$env:OMNICOT_TEXT_MODEL="your_text_model"
-$env:OMNICOT_VISION_MODEL="your_vision_model"
-```
-
-Linux/macOS:
+The default config reads credentials and model names from environment variables:
 
 ```bash
 export OPENAI_API_KEY="your_api_key"
@@ -145,20 +129,6 @@ pip install -e .
 
 Run the bundled OmniCoT smoke test:
 
-Windows PowerShell:
-
-```powershell
-python -m lmms_eval `
-  --model qwen2_5_vl `
-  --model_args pretrained=Qwen/Qwen2.5-VL-7B-Instruct `
-  --tasks omnicot_no_desc `
-  --batch_size 1 `
-  --limit 8 `
-  --output_path results/omnicot_smoke
-```
-
-Linux/macOS:
-
 ```bash
 python -m lmms_eval \
   --model qwen2_5_vl \
@@ -190,22 +160,6 @@ lmms-eval/results/omnicot_smoke/submissions/omnicot_submission.json
 ### 7. Evaluate CoT quality
 
 After answer evaluation, run the CoT-quality judge on the generated submission:
-
-Windows PowerShell:
-
-```powershell
-$env:OPENAI_API_KEY="your_judge_api_key"
-$env:OPENAI_BASE_URL="https://api.openai.com/v1"
-$env:JUDGE_MODEL="your_judge_model"
-
-python tools/omnicot_cot_quality_eval.py `
-  --input-file results/omnicot_smoke/submissions/omnicot_submission.json `
-  --output-dir results/omnicot_smoke/cot_quality `
-  --mode all `
-  --num-threads 4
-```
-
-Linux/macOS:
 
 ```bash
 export OPENAI_API_KEY="your_judge_api_key"
