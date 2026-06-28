@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE/editor
+.vscode/
+.idea/
+.zed/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Runtime outputs
+Omni-COT/data/cache/
+Omni-COT/data/outputs/
+Omni-COT/data/**/*.jsonl
+Omni-COT/data/**/*.log
+
+# Logs
+*.log
+
+# Local secrets
+.env
+.env.*
+Omni-COT/.env
+Omni-COT/.env.*
+Omni-COT/config/api_config.local.yaml
+Omni-COT/config/private/
+
