@@ -1,0 +1,50 @@
+dataset_path: json
+dataset_kwargs:
+  data_files:
+    test: lmms_eval/tasks/omnicot/sample_data/OmniCoT_sample.json
+
+test_split: test
+output_type: generate_until
+doc_to_target: "answer"
+
+generation_kwargs:
+  max_new_tokens: 8192
+  temperature: 0
+  top_p: 0.95
+  num_beams: 1
+  do_sample: false
+
+process_results: !function utils.omnicot_process_results
+
+metric_list:
+  - metric: accuracy
+    aggregation: !function utils.omnicot_aggregate_accuracy
+    higher_is_better: true
+  - metric: contains_accuracy
+    aggregation: !function utils.omnicot_aggregate_contains_accuracy
+    higher_is_better: true
+  - metric: accuracy_See
+    aggregation: !function utils.omnicot_aggregate_accuracy_See
+    higher_is_better: true
+  - metric: accuracy_Locate
+    aggregation: !function utils.omnicot_aggregate_accuracy_Locate
+    higher_is_better: true
+  - metric: accuracy_Move
+    aggregation: !function utils.omnicot_aggregate_accuracy_Move
+    higher_is_better: true
+  - metric: contains_accuracy_See
+    aggregation: !function utils.omnicot_aggregate_contains_accuracy_See
+    higher_is_better: true
+  - metric: contains_accuracy_Locate
+    aggregation: !function utils.omnicot_aggregate_contains_accuracy_Locate
+    higher_is_better: true
+  - metric: contains_accuracy_Move
+    aggregation: !function utils.omnicot_aggregate_contains_accuracy_Move
+    higher_is_better: true
+  - metric: submission
+    aggregation: !function utils.omnicot_aggregate_submission
+    higher_is_better: true
+
+metadata:
+  - version: 1.0
+  - description: "OmniCoT panoramic spatial reasoning evaluation."

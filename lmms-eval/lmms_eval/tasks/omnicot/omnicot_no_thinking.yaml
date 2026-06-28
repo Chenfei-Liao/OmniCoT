@@ -1,0 +1,16 @@
+include: _default_template.yaml
+task: "omnicot_no_thinking"
+
+doc_to_text: !function utils.omnicot_doc_to_text_no_desc
+doc_to_visual: !function utils.omnicot_doc_to_visual
+
+lmms_eval_specific_kwargs:
+  default:
+    pre_prompt: ""
+    post_prompt: "Directly answer the panoramic spatial reasoning question using the provided visual input. You MUST output only <answer>final answer</answer>. The final answer should be concise: an object name, Yes/No, one of North/South/East/West/Northeast/Northwest/Southeast/Southwest, or an angle such as 90 degrees. If the answer cannot be determined, use <answer>Failed to Answer</answer>."
+    postfix_type: "direct"
+
+metadata:
+  - version: 1.0
+  - description: "OmniCoT direct-answer ablation without explicit thinking trace."
+

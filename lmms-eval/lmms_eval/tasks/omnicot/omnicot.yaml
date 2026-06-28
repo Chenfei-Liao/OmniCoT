@@ -1,0 +1,4 @@
+group: omnicot
+task:
+  - omnicot_no_desc
+

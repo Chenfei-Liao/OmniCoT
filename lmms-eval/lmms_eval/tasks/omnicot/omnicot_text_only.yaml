@@ -1,0 +1,17 @@
+include: _default_template.yaml
+task: "omnicot_text_only"
+
+doc_to_text: !function utils.omnicot_doc_to_text_text_only
+doc_to_visual: !function utils.omnicot_doc_to_visual_empty
+doc_to_messages: !function utils.omnicot_doc_to_messages_text_only
+
+lmms_eval_specific_kwargs:
+  default:
+    pre_prompt: ""
+    post_prompt: "Answer the spatial reasoning question using only the text provided. You MUST follow this exact format: <think>step-by-step reasoning</think><answer>final answer</answer>. The final answer should be concise: an object name, Yes/No, one of North/South/East/West/Northeast/Northwest/Southeast/Southwest, or an angle such as 90 degrees. If the answer cannot be determined, use <answer>Failed to Answer</answer>. Do not output anything outside the <think></think> and <answer></answer> tags."
+    postfix_type: "cot"
+
+metadata:
+  - version: 1.0
+  - description: "OmniCoT text-only ablation; no visual input."
+
