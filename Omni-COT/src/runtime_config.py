@@ -1,6 +1,14 @@
 import os
 from typing import Dict, Tuple
 
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
+
+if load_dotenv:
+    load_dotenv()
+
 
 def _resolve_env_placeholder(value: str) -> str:
     if not value:
@@ -50,9 +58,9 @@ def get_model_settings(config: Dict) -> Dict[str, str]:
         models = {}
 
     model_settings = {
-        'vision': str(models.get('vision', '')).strip(),
-        'reasoning': str(models.get('reasoning', '')).strip(),
-        'text': str(models.get('text', '')).strip(),
+        'vision': _resolve_env_placeholder(str(models.get('vision', '')).strip()),
+        'reasoning': _resolve_env_placeholder(str(models.get('reasoning', '')).strip()),
+        'text': _resolve_env_placeholder(str(models.get('text', '')).strip()),
     }
 
     missing = [name for name, value in model_settings.items() if not value]

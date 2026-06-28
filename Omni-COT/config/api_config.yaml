@@ -2,9 +2,9 @@ provider:
   api_key: "${OPENAI_API_KEY}"
   base_url: "${OPENAI_BASE_URL}"
   models:
-    vision: "MODEL_VISION"
-    reasoning: "MODEL_REASONING"
-    text: "MODEL_TEXT"
+    vision: "${OMNICOT_VISION_MODEL}"
+    reasoning: "${OMNICOT_REASONING_MODEL}"
+    text: "${OMNICOT_TEXT_MODEL}"
 
 cache_dir: "data/cache"
 prompts_dir: "prompts"
