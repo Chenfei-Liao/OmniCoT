@@ -50,9 +50,16 @@ def _load_image(path: Path):
 
 def omnicot_doc_to_visual(doc: Dict) -> List:
     images = []
-    image_items = _as_list(doc.get("image"))
+    image_items = _as_list(doc.get("image") or doc.get("file_name"))
 
     for item in image_items:
+        if hasattr(item, "convert"):
+            try:
+                images.append(item.convert("RGB"))
+                continue
+            except Exception:
+                pass
+
         real_path = _existing_path(_candidate_paths(str(item)))
         if real_path is None:
             continue
@@ -71,7 +78,7 @@ def omnicot_doc_to_visual_empty(doc: Dict) -> List:
 
 
 def _visual_hint(doc: Dict) -> str:
-    image_items = _as_list(doc.get("image"))
+    image_items = _as_list(doc.get("image") or doc.get("file_name"))
     if len(image_items) == 1:
         return "Visual Input: The input contains one ERP panoramic image.\n"
 
@@ -222,6 +229,23 @@ def _task_group(question_type: str) -> str:
     return ""
 
 
+def _first_value(doc: Dict, *keys: str, default: Any = "") -> Any:
+    for key in keys:
+        value = doc.get(key)
+        if value not in (None, ""):
+            return value
+    return default
+
+
+def _json_safe_image_ref(doc: Dict) -> str:
+    value = _first_value(doc, "file_name", "image", default="")
+    if isinstance(value, list):
+        value = value[0] if value else ""
+    if isinstance(value, str):
+        return value
+    return ""
+
+
 def omnicot_process_results(doc: Dict, result: Any) -> Dict:
     if isinstance(result, list):
         result = result[0] if result else ""
@@ -230,6 +254,9 @@ def omnicot_process_results(doc: Dict, result: Any) -> Dict:
     pred = extract_answer(prediction)
     reasoning = extract_reasoning(prediction)
     target = doc.get("answer", "")
+    qa_id = _first_value(doc, "QA_id", "qa_id", "id", default="")
+    reference_cot = _first_value(doc, "CoT", "cot", "reference_cot", default=[])
+    ground_truth = _first_value(doc, "description", "ground_truth", default="")
 
     pred_normalized = normalize_answer(pred)
     target_normalized = normalize_answer(target)
@@ -253,14 +280,19 @@ def omnicot_process_results(doc: Dict, result: Any) -> Dict:
         "contains_accuracy": contains_match,
         **by_group,
         "submission": {
-            "QA_id": doc.get("QA_id", ""),
+            "QA_id": qa_id,
+            "qa_id": qa_id,
             "scene_id": doc.get("scene_id", ""),
+            "image": _json_safe_image_ref(doc),
             "question": doc.get("question", ""),
             "answer": target,
             "prediction": prediction,
             "pred_extracted": pred,
             "reasoning": reasoning,
-            "reference_cot": doc.get("CoT", doc.get("reference_cot", "")),
+            "reference_cot": reference_cot,
+            "cot": reference_cot,
+            "ground_truth": ground_truth,
+            "description": ground_truth,
             "type": question_type,
             "subtype": doc.get("subtype", ""),
             "is_correct": exact_match,
