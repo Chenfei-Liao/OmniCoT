@@ -1,3 +1,5 @@
+
+
 <h1 align="center"> OmniCoT: A Benchmark for Global and Multi-Step Panoramic Reasoning </h1>
 
 <div align="center">
@@ -119,7 +121,7 @@ lmms-eval/lmms_eval/tasks/omnicot/sample_data/OmniCoT_sample.json
 lmms-eval/lmms_eval/tasks/omnicot/sample_data/image/
 ```
 
-Install the local `lmms-eval` copy:
+Install the local `lmms-eval` copy (requires Python 3.10 or later):
 
 ```bash
 cd ../lmms-eval
